@@ -21,9 +21,9 @@
       window.location.replace(flowUrl);
     }
 
-    // Wait up to 2.5 s *after the page is visible* before redirecting
+    // Wait up to 5 s *after* the page becomes visible before redirecting
     function waitThenRedirect() {
-      setTimeout(redirectToFlow, 2500);
+      setTimeout(redirectToFlow, 5000); // ← adjust this number for a longer/shorter pause
     }
 
     if (document.visibilityState === 'visible') {
