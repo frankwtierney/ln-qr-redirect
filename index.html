@@ -2,7 +2,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>UB Late Night - Redirecting...</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UB Late Night - Check In</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -16,19 +17,55 @@
         }
         .container {
             text-align: center;
+            animation: fadeIn 0.5s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .logo {
+            max-width: 85%;
+            width: 100%;
+            max-height: 400px;
+            margin-bottom: 15px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        h1 {
+            font-size: 2.5em;
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
         .spinner {
             border: 4px solid rgba(255,255,255,0.3);
             border-top: 4px solid white;
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             animation: spin 1s linear infinite;
             margin: 20px auto;
         }
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
+        }
+        .message {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin-top: 20px;
+        }
+        .checkmark {
+            font-size: 3em;
+            margin: 10px 0;
+            animation: checkmarkPop 0.5s ease-out 0.3s both;
+        }
+        @keyframes checkmarkPop {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
         }
     </style>
     <script>
@@ -40,18 +77,28 @@
             // Your Power Automate flow URL - UPDATE THIS WHEN IT CHANGES
             const flowUrl = 'https://default96464a8af8ed40b199e25f6b50a202.50.environment.api.powerplatform.com/powerautomate/automations/direct/workflows/a9e622c78c9343938de7f228ab5b2df1/triggers/manual/paths/invoke/scan/' + building + '?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=6OFlGiieZNkvZ3AiotzCeeq4sz3ljQQQ3yN2LXhwsns';
             
-            // Redirect immediately
-            window.location.replace(flowUrl);
+            // Wait 1 second before redirecting
+            setTimeout(function() {
+                window.location.replace(flowUrl);
+            }, 1000);
         } else {
-            document.getElementById('message').innerHTML = '<p style="color: #ffcccc;">Error: Building code not found. Please scan a valid QR code.</p>';
+            document.getElementById('message').innerHTML = '<p style="color: #ffcccc;">❌ Error: Building code not found.<br>Please scan a valid QR code.</p>';
         }
     </script>
 </head>
 <body>
     <div class="container">
-        <h1>UB Late Night</h1>
+        <img src="2025_LATE_NIGHT_LOUNGE_Redirect_Graphic_4x5.png" alt="Late Night Lounges" class="logo">
+        
+        <div class="checkmark">✓</div>
+        <h1>Scan Recorded!</h1>
+        
         <div class="spinner"></div>
-        <p id="message">Recording your attendance...<br>Redirecting to event page...</p>
+        
+        <p class="message" id="message">
+            Taking you to tonight's event...<br>
+            <small>Get ready to have fun! 🎉</small>
+        </p>
     </div>
 </body>
 </html>
