@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UB Late Night Lounges</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #002f56;
+            overflow: hidden;
+        }
+        .logo-container {
+            width: 90%;
+            max-width: 500px;
+            animation: fadeIn 0.3s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .logo {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+    </style>
+    <script>
+        // Get the building code from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const building = urlParams.get('building');
+        
+        if (building) {
+            // Your Power Automate flow URL - UPDATE THIS WHEN IT CHANGES
+            const flowUrl = 'https://default96464a8af8ed40b199e25f6b50a202.50.environment.api.powerplatform.com/powerautomate/automations/direct/workflows/a9e622c78c9343938de7f228ab5b2df1/triggers/manual/paths/invoke/scan/' + building + '?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=6OFlGiieZNkvZ3AiotzCeeq4sz3ljQQQ3yN2LXhwsns';
+            
+            // Wait 2.5 seconds before redirecting (adjust this number to change how long it shows)
+            setTimeout(function() {
+                window.location.replace(flowUrl);
+            }, 5000);
+        } else {
+            document.body.innerHTML = '<div style="color: white; text-align: center; padding: 20px;">Error: Invalid QR code</div>';
+        }
+    </script>
+</head>
+<body>
+    <div class="logo-container">
+        <img src="2025_LATE_NIGHT_LOUNGE_Redirect_Graphic_4x5.png" alt="Late Night Lounges" class="logo">
+    </div>
+</body>
+</html>
